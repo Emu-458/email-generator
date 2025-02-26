@@ -53,16 +53,7 @@
     <form id="emailForm">
         <fieldset>
             <legend>選擇議題（可多選）：</legend>
-            <div id="issuesContainer">
-                <label><input type="checkbox" name="issue" value="私煙問題嚴重"> 私煙問題嚴重</label>
-                <label><input type="checkbox" name="issue" value="煙草稅過高、不應再加"> 煙草稅過高、不應再加</label>
-                <label><input type="checkbox" name="issue" value="禁止口味煙產品"> 禁止口味煙產品</label>
-                <label><input type="checkbox" name="issue" value="禁止電子煙及加熱煙"> 禁止電子煙及加熱煙</label>
-                <label><input type="checkbox" name="issue" value="禁止水煙"> 禁止水煙</label>
-                <label><input type="checkbox" name="issue" value="擴大吸煙區但未提供合法吸煙區"> 擴大吸煙區但未提供合法吸煙區</label>
-                <label><input type="checkbox" name="issue" value="未有區分「太空油」毒品及電子煙產品"> 未有區分「太空油」毒品及電子煙產品</label>
-                <label><input type="checkbox" name="issue" value="缺乏長遠的公眾教育計劃"> 缺乏長遠的公眾教育計劃</label>
-            </div>
+            <div id="issuesContainer"></div>
         </fieldset>
 
         <fieldset>
@@ -87,8 +78,10 @@
         // 載入 JSON 數據
         async function loadEmailData() {
             try {
+                console.log("Loading email content...");
                 const response = await fetch('email_content.json');
                 emailData = await response.json();
+                console.log("Email content loaded:", emailData);
                 populateIssues(emailData.issues);
             } catch (error) {
                 console.error("Error loading email content:", error);
@@ -97,6 +90,7 @@
 
         // 生成議題選項
         function populateIssues(issues) {
+            console.log("Populating issues:", issues);
             let container = document.getElementById("issuesContainer");
             container.innerHTML = "";
             for (let issue in issues) {
