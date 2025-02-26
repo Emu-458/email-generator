@@ -80,11 +80,15 @@
             try {
                 console.log("Loading email content...");
                 const response = await fetch('email_content.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
                 emailData = await response.json();
                 console.log("Email content loaded:", emailData);
                 populateIssues(emailData.issues);
             } catch (error) {
                 console.error("Error loading email content:", error);
+                alert("Error loading email content: " + error.message);
             }
         }
 
